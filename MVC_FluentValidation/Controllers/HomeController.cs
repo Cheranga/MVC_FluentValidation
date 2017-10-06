@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVC_FluentValidation.ViewModels;
 
 namespace MVC_FluentValidation.Controllers
 {
@@ -25,6 +26,42 @@ namespace MVC_FluentValidation.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult AddMovie()
+        {
+            var viewModel = new AddMovieViewModel();
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AddMovie(AddMovieViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult AddFluentMovie()
+        {
+            var viewModel = new AddMovieFluentViewModel();
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AddFluentMovie(AddMovieFluentViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(viewModel);
         }
     }
 }
